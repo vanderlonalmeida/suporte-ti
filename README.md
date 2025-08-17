@@ -18,7 +18,8 @@ Atualmente sou responsável pela área de TI em uma rede de escolas, onde implem
 - Infraestrutura de TI (cabeamento estruturado, switches, roteadores, firewalls)  
 - Segurança da Informação  
 - Criação de manuais, tutoriais e documentação técnica  
-- Ferramentas de backup e monitoramento  
+- Ferramentas de backup e monitoramento
+- Python  
 
 ---
 
