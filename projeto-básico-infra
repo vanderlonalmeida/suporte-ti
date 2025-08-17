@@ -1,0 +1,301 @@
+1) Sumário Executivo
+
+Este documento descreve o projeto completo de infraestrutura de TI para uma escola de educação infantil (1 unidade). O objetivo é prover conectividade estável, segura e escalável para equipe administrativa, corpo pedagógico, salas de aula, dispositivos IoT/TVs, videomonitoramento (CFTV) e acesso de visitantes. Inclui topologia, políticas de segurança (LGPD), cabeamento, rede sem fio, servidores/serviços, backup, monitoramento, inventário, plano de implantação, testes de aceitação e orçamento estimado.
+
+Objetivos principais
+
+Disponibilidade de rede ≥ 99,5% no horário escolar.
+
+Segregação de tráfego (VLANs) e controle de acesso.
+
+Wi‑Fi de alta densidade em salas de aula e áreas comuns.
+
+Proteção infantil (filtro de conteúdo) + LGPD.
+
+Backup 3‑2‑1 e recuperação em até 24h (RTO) / perda máxima de 24h (RPO).
+
+Observabilidade: monitoramento e registros (logs) centralizados.
+
+2) Escopo
+
+Incluído:
+
+Cabeamento estruturado (dados/voz) Cat6, patch panel, organização de rack.
+
+Switches PoE, firewall/UTM, roteamento, DHCP/DNS, Wi‑Fi corporativo e de visitantes.
+
+Servidor local (AD/DC + arquivos) e NAS para backup.
+
+Integração com CFTV em VLAN dedicada.
+
+Impressoras de rede e política de cota.
+
+Monitoramento (Zabbix/PRTG), helpdesk (GLPI) e documentação.
+
+Plano de contingência (4G/LTE) para queda do link principal.
+
+Excluído (neste release): ERP escolar, telefonia IP completa (prever VLAN), rede interunidades via VPN (pode ser fase 2), desenvolvimento de sites/aplicativos.
+
+3) Premissas e Requisitos
+
+Usuários: até 80 simultâneos (20 administrativos, 40 pedagógicos, 20 visitantes).
+
+Dispositivos: ~150 (PCs, notebooks, tablets, TVs, APs Wi‑Fi, câmeras IP, impressoras).
+
+Internet: Link principal fibra 300–500 Mbps; backup 4G roteado no firewall.
+
+Segurança: Controle por VLAN, ACL/firewall, WPA2‑Enterprise quando possível, logs + retenção mínima de 6 meses.
+
+Conformidade: LGPD – minimização, controle de acesso (RBAC), registro de operações, política de backup/retensão, termo de consentimento para visitantes na rede Guest.
+
+Energia: Nobreak/UPS para rack principal, firewall, switch core, servidor e NAS.
+
+4) Topologia Lógica
+
+Camada de Borda/UTM: Firewall com IDS/IPS, Anti‑Malware DNS/HTTP, filtro de conteúdo por categorias (child‑safe), VPN (site‑to‑site e acesso remoto).
+
+Core/Distribuição: 1 switch L3 PoE (ou L2 gerenciável + roteamento no firewall).
+
+Acesso: switches PoE em andares/setores para APs e endpoints.
+
+Wi‑Fi: APs 802.11ac/ax, controladora (cloud ou embutida).
+
+Serviços: AD DS, DNS, DHCP, Arquivos; NAS (backup + time machine/arquivos frios).
+
+CFTV: câmeras PoE em VLAN isolada, NVR (pode ser no NAS) com retenção 15–30 dias.
+
+VLANs (exemplo)
+
+VLAN
+
+Nome
+
+Sub-rede
+
+Finalidade
+
+10
+
+ADMIN
+
+10.10.10.0/24
+
+Administração, direção, secretaria
+
+20
+
+PEDAGOGICO
+
+10.10.20.0/24
+
+Professores, laboratórios, TVs/salas
+
+30
+
+VISITANTES
+
+10.10.30.0/24
+
+Rede Wi‑Fi Guest (isolada, sem LAN)
+
+40
+
+CFTV
+
+10.10.40.0/24
+
+Câmeras IP e NVR
+
+50
+
+VOIP
+
+10.10.50.0/24
+
+Telefonia IP (reserva para futura adoção)
+
+99
+
+MGMT
+
+10.10.99.0/24
+
+Gerência (SNMP, SSH, UI de equipamentos)
+
+Plano de Endereçamento (amostra)
+
+Gateways: 10.10.X.1
+
+DHCP Ranges: 10.10.X.100–10.10.X.200
+
+Estáticos: 10.10.X.10–.50 (APs, impressoras, câmeras, servidores)
+
+Servidores: 10.10.10.10 (AD/DNS), 10.10.10.20 (NAS/NVR), 10.10.99.10 (Zabbix/GLPI)
+
+5) Rede Sem Fio (Wi‑Fi)
+
+SSIDs:
+
+Escola‑Admin (VLAN 10) – WPA2‑Enterprise (RADIUS/AD) ou WPA2‑PSK forte; ocultar SSID.
+
+Escola‑Pedagógico (VLAN 20) – WPA2‑PSK rotacionada trimestralmente; controle de banda.
+
+Escola‑Guest (VLAN 30) – Captive portal com termo LGPD, VLAN isolada apenas para Internet, rate limit por cliente (ex.: 5–10 Mbps), bloqueio de P2P.
+
+Densidade e Cobertura:
+
+1 AP para cada 2 salas de aula contíguas (aprox. 20–30 alunos/dispositivos), APs adicionais em biblioteca, recepção e pátio coberto.
+
+Site survey simplificado: heatmap com medição de RSSI/ruído, priorizando −65 dBm nas salas.
+
+Canalização: 2,4 GHz com 1/6/11; 5 GHz com canais DFS se aceito; potência reduzida para evitar sobreposição.
+
+Políticas:
+
+Rate limit e airtime fairness para Guest.
+
+Separar IoT/TVs na VLAN 20 com ACL restritivas (sem acesso a servidores).
+
+Atualizações automáticas de firmware de APs fora do horário de aula.
+
+6) Cabeamento Estruturado e Racks
+
+Categoria: Cat6 (mínimo), patch cords Cat6, conectores RJ45 certificados.
+
+Pontos por sala: 2 dados + 1 voz (mínimo); salas de TI/ADM: 4–6 pontos.
+
+CFTV: cabos dedicados Cat6 para câmeras PoE, etiquetados por setor.
+
+Racks: 1 rack principal 24U (andar térreo) + 1 mini‑rack secundário 12U se necessário.
+
+Organização: patch panel 24/48p, guia de cabos horizontal/vertical, etiquetagem TIA‑606‑B.
+
+Certificação: teste de todos os pontos (Fluke), relatório anexado à documentação.
+
+7) Equipamentos (Especificações Mínimas)
+
+Firewall/UTM: 1 Gbps throughput, IDS/IPS, WebFilter, VPN, failover 4G, 4 portas GbE.
+
+Switch Core: 24–48 portas GbE PoE+ (370W+), L2/ACL, 802.1Q, 802.1X, QoS, SNMP, possíveis uplinks SFP+.
+
+Switch Acesso: 24 portas PoE+ para APs/câmeras/salas.
+
+APs Wi‑Fi 6 (802.11ax) com suporte a MU‑MIMO, OFDMA, PoE, controle centralizado.
+
+Servidor Físico/VM: 8C/16GB RAM/2×SSD 1TB (RAID1) – AD/DNS/DHCP/Arquivo.
+
+NAS: 4 baias, 2× HDD 8TB (RAID1 inicial), snapshots, suporte a iSCSI/NFS/SMB, aplicativo NVR.
+
+UPS/Nobreak: 1500–2200 VA para rack principal (autonomia ≥ 15 min).
+
+Câmeras IP: 1080p/PoE, WDR; NVR (pode ser app no NAS) com retenção 15–30 dias.
+
+Observação: Equipamentos podem ser de um único fabricante (gestão unificada) ou mistos conforme custo/benefício e contratos.
+
+8) Serviços e Políticas
+
+Active Directory / GPO
+
+Unidades organizacionais (OU) por setor.
+
+GPO: senhas fortes, bloqueio de tela (10 min), mapeamento automático de unidades de rede, instalação de impressoras por setor, restrição de Painel de Controle para alunos.
+
+DHCP / DNS
+
+Reservas para impressoras, APs e câmeras.
+
+Option 42 (NTP) apontando para servidor/NTP público confiável.
+
+DNS interno + encaminhadores seguros (Quad9/Cloudflare/Google) com filtro de malware.
+
+Impressão
+
+Servidor de impressão com cotas por setor; fila segura nas áreas comuns.
+
+Impressoras em VLANs 10/20 com ACL impedindo acesso de Guest.
+
+Segurança e LGPD
+
+Princípio do menor privilégio e RBAC para pastas de rede.
+
+Termo de consentimento e aviso de privacidade no captive portal do Guest.
+
+Logs de firewall, autenticação e acesso a arquivos por 6–12 meses.
+
+Antivírus/EDR gerenciado; correções (WSUS/patching) mensais.
+
+9) Backup e Recuperação (Política 3‑2‑1)
+
+3 cópias: produção + NAS local + cópia externa (cloud criptografada).
+
+2 mídias: SSD/HD servidor e HDDs NAS.
+
+1 fora do site: storage em nuvem com chave própria.
+
+Agendamento: diário (incremental) + semanal (full).
+
+Teste de restauração mensal (amostra).
+
+Retenção: 30–90 dias (conforme compliance).
+
+10) Monitoramento, Suporte e Inventário
+
+Monitoramento: Zabbix/PRTG para links, latência, CPU/Mem, disponibilidade de APs/câmeras, consumo PoE, temperatura do rack.
+
+Syslog: concentrado no NAS/servidor (rota de logs do firewall/switch/AP).
+
+Helpdesk: GLPI ou OTRS (abertura, SLA, base de conhecimento).
+
+Inventário: agente (GLPI agent) em estações/servidor, etiqueta patrimonial com código.
+
+11) Plano de Implantação (Fases)
+
+Fase 0 – Planejamento (1 semana)
+
+Levantamento físico, mapa de salas, contagem de pontos, teste de ruído Wi‑Fi.
+
+Definição de VLANs e IPs finais; cronograma sem impacto em aulas.
+
+Fase 1 – Cabeamento e Rack (1–2 semanas)
+
+Lançamento de cabos, patch panel, identificação TIA‑606‑B; certificação e relatório.
+
+Fase 2 – Equipamentos (1 semana)
+
+Instalação de rack, UPS, firewall, switches e APs; uplinks e PoE testados.
+
+Fase 3 – Serviços (1 semana)
+
+AD/DNS/DHCP, compartilhamentos, impressão, políticas GPO.
+
+Configuração Wi‑Fi (SSIDs, VLANs, captive portal) e filtro de conteúdo.
+
+Fase 4 – CFTV e NAS (1 semana)
+
+Câmeras, NVR, retenção; backup 3‑2‑1, replicação off‑site.
+
+Fase 5 – Testes e Entrega (1 semana)
+
+Testes de aceitação (abaixo), manual do usuário, treinamento básico equipe.
+
+12) Padrões de Nomes e Etiquetas
+
+Hosts: SETOR-TIPO-XX (ex.: ADM-PC-07, PED-TAB-03, CFTV-CAM-12).
+
+APs: AP-ANDAR-SALA (ex.: AP-1-105).
+
+Switches: SW-CORE-01, SW-ACESSO-02.
+
+Portas patch panel: PP01-24 com correspondência em tomadas T01-24.
+
+13) Políticas Operacionais (SOP)
+
+Mudanças: janela fora do horário letivo; registro de change e plano de rollback.
+
+Senhas: cofre (ex.: KeePass) com compartilhamento seguro e MFA.
+
+Atualizações: firmware trimestral (firewall/switch/AP), mensal em estações.
+
+Auditoria: revisão semestral de acessos a arquivos sensíveis (dados de alunos/pais).
+
+Incidentes: playbook para indisponibilidade de internet, queda de AP, restauração de arquivos e vazamento de dados (LGPD – comunicação e mitigação).
