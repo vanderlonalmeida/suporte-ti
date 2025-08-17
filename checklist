@@ -1,0 +1,21 @@
+# ✅ Checklist de Suporte Técnico
+
+## Atendimento Inicial
+- [ ] Identificar usuário e setor
+- [ ] Registrar chamado no sistema de suporte
+- [ ] Verificar se é problema recorrente
+
+## Diagnóstico
+- [ ] Testar conectividade de rede
+- [ ] Conferir credenciais de login
+- [ ] Validar configurações de software/hardware
+
+## Solução
+- [ ] Aplicar solução imediata, se possível
+- [ ] Escalar para equipe de Nível 2, se necessário
+- [ ] Documentar solução aplicada
+
+## Encerramento
+- [ ] Confirmar com o usuário se o problema foi resolvido
+- [ ] Fechar chamado no sistema
+- [ ] Atualizar base de conhecimento (se aplicável)
