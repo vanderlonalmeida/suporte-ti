@@ -1,0 +1,19 @@
+# Script de Backup de Pastas
+# Autor: Vanderlon Tavares
+# Descrição: Copia arquivos de uma pasta de origem para uma pasta de destino, criando um log.
+
+# Caminho de origem e destino
+$origem = "C:\Arquivos"
+$destino = "D:\Backup\Arquivos"
+$log = "D:\Backup\log_backup.txt"
+
+# Cria pasta de destino, se não existir
+if (!(Test-Path -Path $destino)) {
+    New-Item -ItemType Directory -Force -Path $destino
+}
+
+# Executa backup
+Robocopy $origem $destino /E /ZB /COPYALL /R:2 /W:5 /LOG:$log
+
+# Mensagem final
+Write-Output "Backup concluído em $(Get-Date)" | Tee-Object -FilePath $log -Append
