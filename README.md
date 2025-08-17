@@ -36,8 +36,8 @@ Atualmente sou responsável pela área de TI em uma rede de escolas, onde implem
 ---
 
 ## 📫 Contato
-- **LinkedIn:** [linkedin.com/in/vanderlontavares](https://linkedin.com/in/vanderlontavares)  
-- **E-mail:** vanderlon.seuemail@exemplo.com  
+- **LinkedIn:** [linkedin.com/in/vanderlon-almeida-tavares](https://www.linkedin.com/in/vanderlon-almeida-tavares-35054a2b4/)  
+- **E-mail:** vanderlon.tavares@gmail.com  
 
 ---
 
