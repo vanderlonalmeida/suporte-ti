@@ -1,0 +1,108 @@
+A ITIL v4 (Information Technology Infrastructure Library, versão 4) é um conjunto de boas práticas para gerenciar serviços de TI.
+Ela ajuda empresas a alinhar a TI com as necessidades do negócio, garantindo mais valor, eficiência e qualidade.
+
+1️⃣ O que é ITIL v4?
+
+Um framework de gestão de serviços de TI.
+
+Fornece práticas que ajudam a entregar valor ao cliente e melhorar continuamente os serviços.
+
+Foco em agilidade, automação e integração com metodologias modernas como DevOps, Lean e Agile.
+
+2️⃣ Principais Conceitos
+
+🔹 Serviço → Meio de entregar valor ao cliente sem que ele precise se preocupar com custos e riscos.
+🔹 Valor → Resultado positivo percebido pelo cliente e pela organização.
+🔹 Co-criação de valor → O valor não é gerado só pela TI, mas em conjunto com o cliente.
+
+3️⃣ Os 4 Dimensões da Gestão de Serviços
+
+Para ter uma visão completa, o ITIL v4 considera 4 dimensões:
+
+Organizações e Pessoas – Cultura, estrutura e habilidades da equipe.
+
+Informações e Tecnologia – Ferramentas, sistemas e dados usados.
+
+Parceiros e Fornecedores – Relação com terceiros que dão suporte.
+
+Fluxos de Valor e Processos – Como as atividades e processos são organizados.
+
+4️⃣ Os 7 Princípios Orientadores do ITIL v4
+
+Eles servem como guia em qualquer situação:
+
+Foco no valor – Sempre pensar no que gera valor para o cliente.
+
+Comece de onde você está – Aproveite o que já funciona.
+
+Progrida iterativamente com feedback – Melhorias em pequenas etapas.
+
+Colabore e promova visibilidade – Trabalhar junto e com transparência.
+
+Pense e trabalhe holisticamente – Ver o todo, não só partes isoladas.
+
+Mantenha a simplicidade e praticidade – Evite burocracia desnecessária.
+
+Otimize e automatize – Melhorar continuamente e automatizar sempre que possível.
+
+5️⃣ Sistema de Valor de Serviço (SVS)
+
+É o coração do ITIL v4. Mostra como os componentes e atividades da organização trabalham juntos para gerar valor.
+
+🔹 Componentes do SVS:
+
+Princípios orientadores
+
+Governança
+
+Cadeia de valor de serviço (Service Value Chain)
+
+Práticas de gestão
+
+Melhoria contínua
+
+6️⃣ Cadeia de Valor de Serviço (Service Value Chain)
+
+É o modelo operacional central do ITIL v4. Tem 6 atividades principais:
+
+Planejar – Entender visão, metas e estratégia.
+
+Engajar – Interagir com clientes e stakeholders.
+
+Projetar e Transicionar – Criar e implementar novos serviços.
+
+Obter/Construir – Desenvolver ou adquirir recursos necessários.
+
+Entregar e Suportar – Operar os serviços e dar suporte ao cliente.
+
+Melhorar – Promover melhorias contínuas.
+
+7️⃣ Práticas do ITIL v4 (resumidas)
+
+Substituem os “processos” do ITIL v3 e são mais abrangentes. São 34 práticas no total, divididas em 3 grupos:
+
+🔹 Práticas Gerais de Gestão
+
+Exemplo: Gestão de Risco, Gestão Financeira, Melhoria Contínua.
+
+🔹 Práticas de Gestão de Serviços
+
+Exemplo: Gerenciamento de Incidentes, Gestão de Problemas, Gestão de Mudanças, Gestão de Nível de Serviço.
+
+🔹 Práticas Técnicas
+
+Exemplo: Gestão de Infraestrutura e Plataforma, Desenvolvimento de Software.
+
+8️⃣ Benefícios do ITIL v4
+
+✅ Melhora a eficiência da TI.
+✅ Aumenta a satisfação do cliente.
+✅ Reduz riscos e falhas em serviços.
+✅ Ajuda a integrar TI com os objetivos do negócio.
+✅ Focado em agilidade e inovação.
+
+9️⃣ Resumindo
+
+A ITIL v4 é como um manual moderno de boas práticas em TI.
+Ela ensina que TI não é só tecnologia, mas sim valor para o cliente.
+Com foco em melhoria contínua, automação e colaboração, ela se adapta ao mundo atual, junto com Agile e DevOps.
