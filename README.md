@@ -29,10 +29,11 @@ Atualmente sou responsável pela área de TI em uma rede de escolas, onde implem
 ---
 
 ## 📂 Projetos e Documentações
-- [Script de Backup Automatizado (PowerShell)](link_para_repositorio_ou_arquivo)  
-- [Checklist de Suporte Técnico - Atendimento a Usuários](link_para_repositorio_ou_arquivo)  
-- [Guia de Configuração de GPO no Windows Server](link_para_repositorio_ou_arquivo)  
-- [Projeto de Infraestrutura de Rede Escolar](link_para_repositorio_ou_arquivo)  
+- [Script de Backup Automatizado (PowerShell)](https://github.com/vanderlonalmeida/suporte-ti/commit/2a997a9c0cbbf6ee868ec972254133622ba35571#diff-54d00d867758cef816bc4685f58e327b949712b07ebd17c3485f3ffc9e9f5133)  
+- [Checklist de Suporte Técnico - Atendimento a Usuários](https://github.com/vanderlonalmeida/suporte-ti/compare/vanderlonalmeida-patch-1?expand=1#diff-6da624dba5235ba1f3901c904a78ea41debbfb0d8a488aeba7063dba508d9211)  
+- [Guia de Configuração de GPO no Windows Server](https://github.com/vanderlonalmeida/suporte-ti/blob/main/GPO-windows-server)  
+- [Projeto de Infraestrutura de Rede Escolar](https://github.com/vanderlonalmeida/suporte-ti/blob/main/projeto-b%C3%A1sico-infra)
+- [Guia ITIL-v4](https://github.com/vanderlonalmeida/suporte-ti/blob/main/guia-ITIL)
 
 ---
 
