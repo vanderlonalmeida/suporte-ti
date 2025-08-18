@@ -1,0 +1,107 @@
+📘 Guia de Configuração de GPO no Windows Server
+1. Acessando o Gerenciamento de GPO
+
+Entre no servidor com conta Administrador.
+
+Abra o Server Manager.
+
+Vá em Tools (Ferramentas) → Group Policy Management.
+
+2. Criando uma Nova GPO
+
+No painel esquerdo, expanda a floresta (Forest) e depois o domínio.
+
+Clique com o botão direito em Group Policy Objects → New.
+
+Dê um nome descritivo (ex: "Política de Senhas" ou "Bloqueio USB").
+
+3. Editando uma GPO
+
+Clique com o botão direito na GPO criada → Edit.
+
+Selecione se a configuração será feita em:
+
+Computer Configuration → afeta computadores.
+
+User Configuration → afeta usuários.
+
+4. Exemplos de Políticas Comuns
+🔑 Políticas de Senha
+
+Caminho:
+Computer Configuration → Policies → Windows Settings → Security Settings → Account Policies → Password Policy
+
+Definir:
+
+Tamanho mínimo (ex: 8 caracteres).
+
+Expiração (ex: 60 dias).
+
+Complexidade (letras maiúsculas, minúsculas, números e símbolos).
+
+⏳ Bloqueio de Conta
+
+Caminho:
+Computer Configuration → Policies → Windows Settings → Security Settings → Account Lockout Policy
+
+Definir:
+
+Número de tentativas falhas (ex: 5).
+
+Duração do bloqueio (ex: 30 minutos).
+
+💻 Restrições de Dispositivos USB
+
+Caminho:
+Computer Configuration → Policies → Administrative Templates → System → Removable Storage Access
+
+Ativar:
+
+Deny all access (impede uso de pendrives).
+
+📂 Redirecionamento de Pasta
+
+Caminho:
+User Configuration → Policies → Windows Settings → Folder Redirection
+
+Usado para salvar Documentos ou Área de Trabalho direto no servidor.
+
+📌 Mensagem de Login (Aviso Legal)
+
+Caminho:
+Computer Configuration → Windows Settings → Security Settings → Local Policies → Security Options
+
+Políticas:
+
+Interactive logon: Message title for users.
+
+Interactive logon: Message text for users.
+(Exibir aviso da instituição no login).
+
+5. Aplicando a GPO
+
+No Group Policy Management, clique com botão direito no domínio ou OU desejada.
+
+Selecione Link an Existing GPO.
+
+Escolha a GPO configurada.
+
+6. Forçando a Atualização
+
+Nos clientes:
+Abra o Prompt de Comando → digite:
+
+gpupdate /force
+
+
+Reinicie se necessário.
+
+7. Boas Práticas
+
+Nomeie as GPOs de forma clara (ex: SEG_Senha, ADM_USB).
+
+Use OU (Organizational Units) para aplicar políticas em grupos específicos.
+
+Evite alterar a Default Domain Policy.
+
+Documente todas as alterações.
